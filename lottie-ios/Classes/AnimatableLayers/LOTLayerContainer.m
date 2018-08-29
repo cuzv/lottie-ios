@@ -37,14 +37,13 @@
   if (self) {
     _wrapperLayer = [CALayer new];
     [self addSublayer:_wrapperLayer];
-    DEBUG_Center = [CALayer layer];
-    
-    DEBUG_Center.bounds = CGRectMake(0, 0, 20, 20);
-    DEBUG_Center.borderColor = [UIColor blueColor].CGColor;
-    DEBUG_Center.borderWidth = 2;
-    DEBUG_Center.masksToBounds = YES;
     
     if (ENABLE_DEBUG_SHAPES) {
+        DEBUG_Center = [CALayer layer];
+        DEBUG_Center.bounds = CGRectMake(0, 0, 20, 20);
+        DEBUG_Center.borderColor = [UIColor blueColor].CGColor;
+        DEBUG_Center.borderWidth = 2;
+        DEBUG_Center.masksToBounds = YES;
       [_wrapperLayer addSublayer:DEBUG_Center];
     } 
     self.actions = @{@"hidden" : [NSNull null], @"opacity" : [NSNull null], @"transform" : [NSNull null]};
@@ -67,7 +66,9 @@
     _wrapperLayer.bounds = CGRectMake(0, 0, layer.layerWidth.floatValue, layer.layerHeight.floatValue);
     _wrapperLayer.anchorPoint = CGPointMake(0, 0);
     _wrapperLayer.masksToBounds = YES;
-    DEBUG_Center.position = LOT_RectGetCenterPoint(self.bounds);
+    if (ENABLE_DEBUG_SHAPES) {
+        DEBUG_Center.position = LOT_RectGetCenterPoint(self.bounds);
+    }
   }
   
   if (layer.layerType == LOTLayerTypeImage) {

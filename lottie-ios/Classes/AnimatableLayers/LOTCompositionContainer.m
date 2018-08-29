@@ -29,13 +29,13 @@
               withAssestGroup:(LOTAssetGroup *)assetGroup {
   self = [super initWithModel:layer inLayerGroup:layerGroup];
   if (self) {
-    DEBUG_Center = [CALayer layer];
     
-    DEBUG_Center.bounds = CGRectMake(0, 0, 20, 20);
-    DEBUG_Center.borderColor = [UIColor orangeColor].CGColor;
-    DEBUG_Center.borderWidth = 2;
-    DEBUG_Center.masksToBounds = YES;
     if (ENABLE_DEBUG_SHAPES) {
+      DEBUG_Center = [CALayer layer];
+      DEBUG_Center.bounds = CGRectMake(0, 0, 20, 20);
+      DEBUG_Center.borderColor = [UIColor orangeColor].CGColor;
+      DEBUG_Center.borderWidth = 2;
+      DEBUG_Center.masksToBounds = YES;
       [self.wrapperLayer addSublayer:DEBUG_Center];
     }
     if (layer.startFrame != nil) {

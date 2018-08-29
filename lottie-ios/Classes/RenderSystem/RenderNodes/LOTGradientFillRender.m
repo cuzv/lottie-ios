@@ -68,9 +68,9 @@
     _gradientLayer.actions = [_gradientOpacityLayer.actions copy];
     [self.outputLayer addSublayer:_gradientLayer];
     
-    centerPoint_DEBUG = [CALayer layer];
-    centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
     if (ENABLE_DEBUG_SHAPES) {
+      centerPoint_DEBUG = [CALayer layer];
+      centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
       [self.outputLayer addSublayer:centerPoint_DEBUG];
     }
   }
@@ -91,9 +91,12 @@
 }
 
 - (void)performLocalUpdate {
-  centerPoint_DEBUG.backgroundColor =  [UIColor magentaColor].CGColor;
-  centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
-  centerPoint_DEBUG.borderWidth = 2.f;
+  if (ENABLE_DEBUG_SHAPES) {
+    centerPoint_DEBUG.backgroundColor =  [UIColor magentaColor].CGColor;
+    centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
+    centerPoint_DEBUG.borderWidth = 2.f;
+  }
+
   _startPoint = [_startPointInterpolator pointValueForFrame:self.currentFrame];
   _endPoint = [_endPointInterpolator pointValueForFrame:self.currentFrame];
   self.outputLayer.opacity = [_opacityInterpolator floatValueForFrame:self.currentFrame];

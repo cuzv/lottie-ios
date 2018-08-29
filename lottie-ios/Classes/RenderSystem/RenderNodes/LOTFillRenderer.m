@@ -24,9 +24,10 @@
   if (self) {
     colorInterpolator_ = [[LOTColorInterpolator alloc] initWithKeyframes:fill.color.keyframes];
     opacityInterpolator_ = [[LOTNumberInterpolator alloc] initWithKeyframes:fill.opacity.keyframes];
-    centerPoint_DEBUG = [CALayer layer];
-    centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
+    
     if (ENABLE_DEBUG_SHAPES) {
+      centerPoint_DEBUG = [CALayer layer];
+      centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
       [self.outputLayer addSublayer:centerPoint_DEBUG];
     }
     _evenOddFillRule = fill.evenOddFillRule;
@@ -46,9 +47,11 @@
 }
 
 - (void)performLocalUpdate {
-  centerPoint_DEBUG.backgroundColor =  [colorInterpolator_ colorForFrame:self.currentFrame];
-  centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
-  centerPoint_DEBUG.borderWidth = 2.f;
+  if (ENABLE_DEBUG_SHAPES) {
+    centerPoint_DEBUG.backgroundColor =  [colorInterpolator_ colorForFrame:self.currentFrame];
+    centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
+    centerPoint_DEBUG.borderWidth = 2.f;
+  }
   self.outputLayer.fillColor = [colorInterpolator_ colorForFrame:self.currentFrame];
   self.outputLayer.opacity = [opacityInterpolator_ floatValueForFrame:self.currentFrame];
 }

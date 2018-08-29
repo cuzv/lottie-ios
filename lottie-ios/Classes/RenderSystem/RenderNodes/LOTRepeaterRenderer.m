@@ -46,9 +46,9 @@
     [_replicatorLayer addSublayer:_instanceLayer];
     [self.outputLayer addSublayer:_replicatorLayer];
     
-    centerPoint_DEBUG = [CALayer layer];
-    centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
     if (ENABLE_DEBUG_SHAPES) {
+      centerPoint_DEBUG = [CALayer layer];
+      centerPoint_DEBUG.bounds = CGRectMake(0, 0, 20, 20);
       [self.outputLayer addSublayer:centerPoint_DEBUG];
     }
   }
@@ -85,9 +85,11 @@
 }
 
 - (void)performLocalUpdate {
-  centerPoint_DEBUG.backgroundColor =  [UIColor greenColor].CGColor;
-  centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
-  centerPoint_DEBUG.borderWidth = 2.f;
+  if (ENABLE_DEBUG_SHAPES) {
+    centerPoint_DEBUG.backgroundColor =  [UIColor greenColor].CGColor;
+    centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
+    centerPoint_DEBUG.borderWidth = 2.f;
+  }
   
   CGFloat copies = ceilf([_copiesInterpolator floatValueForFrame:self.currentFrame]);
   _replicatorLayer.instanceCount = (NSInteger)copies;
